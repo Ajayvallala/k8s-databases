@@ -35,19 +35,20 @@ spec:
      component: catalogue
      env: dev
      tier: app
-  containers:
-  - name: catalogue
-    image: ajayvallala/catalogue:v1
-    resources:
-     requests:
-      cpu: "50m"
-      memory: "128Mi"
-     limits:
-      cpu: "100m"
-      memory: "256Mi"
-    envFrom:
-    - configMapRef:
-       name: catalogue
+  spec:
+   containers:
+   - name: catalogue
+     image: ajayvallala/catalogue:v1
+     resources:
+      requests:
+       cpu: "50m"
+       memory: "128Mi"
+      limits:
+       cpu: "100m"
+       memory: "256Mi"
+     envFrom:
+     - configMapRef:
+        name: catalogue
 
 ---
 

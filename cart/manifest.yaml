@@ -36,19 +36,20 @@ spec:
     component: cart
     project: roboshop
     tier: app
-  containers:
-  - name: cart
-    image: ajayvallala/cart:v1
-    resource:
-     requests:
-      cpu: "50m"
-      memory: "128Mi"
-     limits:
-      cpu: "100m"
-      memory: "256Mi"
-    envFrom:
-    - configMapRef:
-       name: cart
+  spec:
+   containers:
+   - name: cart
+     image: ajayvallala/cart:v1
+     resource:
+      requests:
+       cpu: "50m"
+       memory: "128Mi"
+      limits:
+       cpu: "100m"
+       memory: "256Mi"
+     envFrom:
+     - configMapRef:
+        name: cart
 
 ---
 

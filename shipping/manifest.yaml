@@ -35,19 +35,20 @@ spec:
     component: shipping
     project: roboshop
     tier: app
-  containers:
-  - name: shipping
-    image: ajayvallala/shipping:v1
-    resource:
-     requests:
-      cpu: "100m"
-      memory: "256Mi"
-     limits:
-      cpu: "200m"
-      memory: "512Mi"
-    envFrom:
-    - configMapRef:
-       name: shipping
+  spec:
+   containers:
+   - name: shipping
+     image: ajayvallala/shipping:v1
+     resource:
+      requests:
+       cpu: "100m"
+       memory: "256Mi"
+      limits:
+       cpu: "200m"
+       memory: "512Mi"
+     envFrom:
+     - configMapRef:
+        name: shipping
 
 ---
 

@@ -36,19 +36,20 @@ spec:
     component: user
     project: roboshop
     tier: app
-  containers:
-  - name: user
-    image: ajayvallala/user:v1
-    envFrom:
-    - configMapRef:
-        name: user
-    resource:
-     requests:
-      cpu: "50m"
-      memory: "128Mi"
-     limits:
-      cpu: "100m"
-      memory: "256Mi"
+  spec:
+   containers:
+   - name: user
+     image: ajayvallala/user:v1
+     envFrom:
+     - configMapRef:
+         name: user
+     resource:
+      requests:
+       cpu: "50m"
+       memory: "128Mi"
+      limits:
+       cpu: "100m"
+       memory: "256Mi"
 
 ---
 

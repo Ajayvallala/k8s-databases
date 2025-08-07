@@ -54,22 +54,23 @@ spec:
    labels:
      project: roboshop
      env: dev
-     tier: app 
-  containers:
-  - name: payment
-    image: ajayvallala/payment:v1
-    resources:
-     requests:
-      cpu: "50m"
-      memory: "128Mi"
-     limits:
-      cpu: "100m"
-      memory: "256Mi"
-    envFrom:
-    - configMapRef:
-       name: payment
-    - secretRef:
-       name: payment
+     tier: app
+  spec: 
+   containers:
+   - name: payment
+     image: ajayvallala/payment:v1
+     resources:
+      requests:
+       cpu: "50m"
+       memory: "128Mi"
+      limits:
+       cpu: "100m"
+       memory: "256Mi"
+     envFrom:
+     - configMapRef:
+         name: payment
+     - secretRef:
+         name: payment
 
 ---
 

@@ -80,23 +80,24 @@ spec:
      component: rabbitmq
      env: dev
      tier: database 
-  containers:
-  - name: rabbitmq
-    image: ajayvallala/rabbitmq:v1
-    volumeMounts:
-    - name: rabbitmq
-      mountPath: /var/lib/rabbitmq
-    envFrom:
-    - secretRef:
-       name: rabbitmq
+  spec:
+   containers:
+   - name: rabbitmq
+     image: ajayvallala/rabbitmq:v1
+     volumeMounts:
+     - name: rabbitmq
+       mountPath: /var/lib/rabbitmq
+     envFrom:
+     - secretRef:
+        name: rabbitmq
 
  volumeClaimTemplates:
-  metadata:
-   name: rabbitmq
-  spec:
-   storageClassName: "ebs-dynamic"
-   accessModes: ["ReadWriteOnce"]
-   resource:
-    requests:
-     storage: 2Gi
+ - metadata:
+    name: rabbitmq
+   spec:
+    storageClassName: "ebs-dynamic"
+    accessModes: ["ReadWriteOnce"]
+    resource:
+     requests:
+      storage: 2Gi
   
