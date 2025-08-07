@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Secret
 metadata:
  name: rabbitmq
- namespace: 
+ namespace: roboshop
  labels: 
    component: rabbitmq
    env: dev
@@ -18,7 +18,7 @@ apiVersion: v1
 kind: Service
 metadata:
  name: rabbitmq-headless
- namspace: roboshop
+ namespace: roboshop
  labels: 
    component: rabbitmq
    env: dev
@@ -40,7 +40,7 @@ apiVersion: v1
 kind: Service
 metadata:
  name: rabbitmq
- namspace: roboshop
+ namespace: roboshop
  labels: 
    component: rabbitmq
    env: dev
@@ -97,7 +97,7 @@ spec:
    spec:
     storageClassName: "ebs-dynamic"
     accessModes: ["ReadWriteOnce"]
-    resource:
+    resources:
      requests:
       storage: 2Gi
   
