@@ -65,12 +65,13 @@ spec:
       component: redis
       env: dev
       tier: database
-   containers:
-   - name: redis
-     image: ajayvallala/redis:v1
-     volumeMounts:
-     - name: redis
-       mountPath: /data
+   spec:
+    containers:
+    - name: redis
+      image: ajayvallala/redis:v1
+      volumeMounts:
+      - name: redis
+        mountPath: /data
 
   # This is nothing but PVC, we can directly create here
   volumeClaimTemplates:
