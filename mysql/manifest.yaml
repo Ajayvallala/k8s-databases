@@ -97,7 +97,6 @@ spec:
   spec:
    StorageClass: "ebs-dynamic"
    accessModes: ["ReadWriteOnce"]
-   reclaimPolicy: Retain
    resources:
     requests:
      storage: 2Gi

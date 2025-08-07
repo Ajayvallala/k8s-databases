@@ -70,12 +70,11 @@ spec:
         mountPath: /data
 
  volumeClaimTemplates:
-  - metadata:
+ - metadata:
       name: mongodb
-    spec:
+   spec:
       accessModes: [ "ReadWriteOnce" ]
       storageClassName: "ebs-dynamic"
-      reclaimPolicy: Retain
       resources:
         requests:
           storage: 2Gi
