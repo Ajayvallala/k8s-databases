@@ -30,7 +30,7 @@ spec:
    env: dev
    tier: database 
  ports:
- - protocal: TCP
+ - protocol: TCP
    port: 5672
    targetPort: 5672
 
@@ -51,7 +51,7 @@ spec:
    env: dev
    tier: database 
  ports:
- - protocal: TCP
+ - protocol: TCP
    port: 5672
    targetPort: 5672
 
