@@ -89,12 +89,12 @@ spec:
      - name: mysql
        mountPath: /var/lib/mysql
  volumeClaimTemplates:
-  metadata:
+ - metadata:
    name: mysql
    namespace: roboshop
-  spec:
-   StorageClass: "ebs-dynamic"
-   accessModes: ["ReadWriteOnce"]
-   resources:
-    requests:
-     storage: 2Gi
+   spec:
+    StorageClass: "ebs-dynamic"
+    accessModes: ["ReadWriteOnce"]
+    resources:
+     requests:
+      storage: 2Gi
