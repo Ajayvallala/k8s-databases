@@ -1,0 +1,103 @@
+apiVersion: v1 
+kind: Secret
+metadata:
+ name: mysql
+ namespace: roboshop
+ labels:
+   component: mysql
+   env: dev
+   tier: database 
+type: Opaque
+data:
+ MYSQL_ROOT_PASSWORD: "Um9ib1Nob3BAMQ=="
+
+---
+
+apiVersion: v1 
+kind: Service
+metadata:
+ name: mysql-headless
+ namespace: roboshop
+ labels:
+   component: mysql
+   env: dev
+   tier: database 
+spec:
+ clusterIP: None
+ selector:
+   component: mysql
+   env: dev
+   tier: database 
+ ports:
+ - protocol: TCP
+   port: 3306
+   targetPort: 3306 
+
+---
+
+apiVersion: v1 
+kind: Service
+metadata:
+ name: mysql
+ namespace: roboshop
+ labels:
+   component: mysql
+   env: dev
+   tier: database 
+spec:
+ selector:
+   component: mysql
+   env: dev
+   tier: database 
+ ports:
+ - protocol: TCP
+   port: 3306
+   targetPort: 3306 
+
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+ name: mysql
+ namespace: roboshop
+ labels: 
+   component: mysql
+   env: dev
+   tier: database 
+spec:
+ replicas: 2
+ selector:
+  matchLabels:
+   component: mysql
+   env: dev
+   tier: database 
+ template:
+  metadata:
+   labels:
+     component: mysql
+     env: dev
+     tier: database 
+  containers:
+  - name: mysql
+    image: ajayvallala/mysql:v1
+    envFrom:
+    - secretRef:
+       name: mysql
+    volumeMounts:
+    - name: mysql
+      mountPath: /var/lib/mysql
+    
+
+
+ volumeClaimTemplates:
+  metadata:
+   name: mysql
+   namespace: roboshop
+  spec:
+   StorageClass: "ebs-dynamic"
+   accessModes: ["ReadWriteOnce"]
+   reclaimPolicy: Retain
+   resources:
+    requests:
+     storage: 2Gi

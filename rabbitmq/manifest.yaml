@@ -1,0 +1,103 @@
+apiVersion: v1 
+kind: Secret
+metadata:
+ name: rabbitmq
+ namespace: 
+ labels: 
+   component: rabbitmq
+   env: dev
+   tier: database 
+type: Opaque
+data:
+  RABBITMQ_DEFAULT_USER: "cm9ib3Nob3A="
+  RABBITMQ_DEFAULT_PASS: "cm9ib3Nob3AxMjM="
+
+---
+
+apiVersion: v1 
+kind: Service
+metadata:
+ name: rabbitmq-headless
+ namspace: roboshop
+ labels: 
+   component: rabbitmq
+   env: dev
+   tier: database 
+spec:
+ clusterIP: None
+ selector:
+   component: rabbitmq
+   env: dev
+   tier: database 
+ ports:
+ - protocal: TCP
+   port: 5672
+   targetPort: 5672
+
+---
+
+apiVersion: v1 
+kind: Service
+metadata:
+ name: rabbitmq
+ namspace: roboshop
+ labels: 
+   component: rabbitmq
+   env: dev
+   tier: database 
+spec:
+ selector:
+   component: rabbitmq
+   env: dev
+   tier: database 
+ ports:
+ - protocal: TCP
+   port: 5672
+   targetPort: 5672
+
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+ name: rabbitmq
+ namespace: roboshop
+ labels: 
+   component: rabbitmq
+   env: dev
+   tier: database 
+spec:
+ replicas: 2
+ serviceName: "rabbitmq-headless"
+ selector:
+  matchLabels:
+   component: rabbitmq
+   env: dev
+   tier: database 
+ template:
+  metadata:
+   labels:
+     component: rabbitmq
+     env: dev
+     tier: database 
+  containers:
+  - name: rabbitmq
+    image: ajayvallala/rabbitmq:v1
+    volumeMounts:
+    - name: rabbitmq
+      mountPath: /var/lib/rabbitmq
+    envFrom:
+    - secretRef:
+       name: rabbitmq
+
+ volumeClaimTemplates:
+  metadata:
+   name: rabbitmq
+  spec:
+   storageClassName: "ebs-dynamic"
+   accessModes: ["ReadWriteOnce"]
+   reclaimPolicy: Retain
+   resource:
+    requests:
+     storage: 2Gi
+  
