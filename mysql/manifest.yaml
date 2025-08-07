@@ -91,7 +91,6 @@ spec:
  volumeClaimTemplates:
  - metadata:
     name: mysql
-    namespace: roboshop
    spec:
     StorageClass: "ebs-dynamic"
     accessModes: ["ReadWriteOnce"]
