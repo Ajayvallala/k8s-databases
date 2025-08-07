@@ -74,14 +74,15 @@ spec:
 
   # This is nothing but PVC, we can directly create here
   volumeClaimTemplates:
-   metadata:
-    name: redis
-   spec: 
-    storageClassName: "ebs-dynamic"
-    accessModes: ["ReadWriteOnce"]
-    resources:
-     requests:
-      storage: 2Gi
+  - metadata:
+     name: redis
+    spec: 
+     storageClassName: "ebs-dynamic"
+     accessModes: ["ReadWriteOnce"]
+     resources:
+      requests:
+       storage: 2Gi
+
 
 
 
