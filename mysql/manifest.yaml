@@ -78,18 +78,16 @@ spec:
      component: mysql
      env: dev
      tier: database 
-  containers:
-  - name: mysql
-    image: ajayvallala/mysql:v1
-    envFrom:
-    - secretRef:
-       name: mysql
-    volumeMounts:
-    - name: mysql
-      mountPath: /var/lib/mysql
-    
-
-
+  spec:
+   containers:
+   - name: mysql
+     image: ajayvallala/mysql:v1
+     envFrom:
+     - secretRef:
+        name: mysql
+     volumeMounts:
+     - name: mysql
+       mountPath: /var/lib/mysql
  volumeClaimTemplates:
   metadata:
    name: mysql
